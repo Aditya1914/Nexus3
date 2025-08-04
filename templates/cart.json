@@ -1,0 +1,51 @@
+{
+  "sections": {
+    "main": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Your Cart",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Please use the cart icon (🛒) in the header to view and manage your cart items.</p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Continue Shopping",
+            "button_link": "/collections/all",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "cart-redirect": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<script src=\"{{ 'cart-page-redirect.js' | asset_url }}\" defer=\"defer\"></script>"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "cart-redirect"
+  ]
+}
