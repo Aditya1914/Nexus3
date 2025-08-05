@@ -3168,7 +3168,9 @@ details-disclosure > details {
 .content-container--full-width,
 .global-media-settings--full-width,
 .global-media-settings--full-width img,
-.global-media-settings--full-width video,
+.global-media-settings--full-width video{
+  max-height: 90vh;
+}
 .global-media-settings--full-width iframe,
 .global-media-settings--full-width .placeholder-svg {
   border-radius: 0;
