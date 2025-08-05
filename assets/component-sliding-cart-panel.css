@@ -47,7 +47,7 @@
   width: 100%;
   max-width: 480px;
   height: 100vh;
-  background: white;
+  background: #e1d0c8;
   border-radius: 24px 0 0 24px;
   box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
   display: flex;
@@ -88,7 +88,7 @@
   justify-content: space-between;
   padding: 1.5rem 1.5rem 0;
   border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
-  background: white;
+  background: #e1d0c8;
   position: relative;
   z-index: 2;
 }
@@ -471,7 +471,7 @@
 .sliding-cart__summary {
   padding: 1rem 1.5rem 1rem;
   border-top: 1px solid rgba(var(--color-foreground), 0.08);
-  background: white;
+  background: #e1d0c8;
   position: sticky;
   bottom: 80px; /* Position above checkout button */
   z-index: 9;
@@ -510,7 +510,7 @@
 /* Checkout Button */
 .sliding-cart__checkout {
   padding: 1.5rem;
-  background: white;
+  background: #e1d0c8;
   border-top: 1px solid rgba(var(--color-foreground), 0.08);
   position: sticky;
   bottom: 0;
@@ -704,7 +704,7 @@
 }
 
 .sliding-cart__modal-content {
-  background: white;
+  background: #e1d0c8;
   border-radius: 12px;
   max-width: 400px;
   width: 90%;
@@ -943,6 +943,60 @@
   color: rgba(var(--color-foreground), 0.5);
   font-style: italic;
   padding: 2rem;
+}
+
+/* Continue Shopping Button - Royal Red Theme */
+.sliding-cart__empty-content .button {
+  background: #8B0000;
+  color: #FFFFFF;
+  border: 2px solid #8B0000;
+  border-radius: 30px;
+  padding: 1.25rem 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  transition: all 0.3s ease;
+  text-decoration: none !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 12rem;
+  min-height: 4.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.sliding-cart__empty-content .button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(220, 20, 60, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.sliding-cart__empty-content .button:hover {
+  background: #DC143C;
+  border-color: #DC143C;
+  color: #FFFFFF;
+  text-decoration: none !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(139, 0, 0, 0.3);
+}
+
+.sliding-cart__empty-content .button:hover:before {
+  left: 100%;
+}
+
+.sliding-cart__empty-content .button:focus-visible,
+.sliding-cart__empty-content .button:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 
+              0 0 0 0.5rem rgba(139, 0, 0, 0.5),
+              0 0 0.5rem 0.4rem rgba(139, 0, 0, 0.3);
+  text-decoration: none !important;
 }
 
 /* Mobile Responsiveness for Modals */

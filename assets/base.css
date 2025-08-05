@@ -2806,8 +2806,15 @@ details[open] > .header__submenu {
   color: rgba(var(--color-foreground), 0.75);
 }
 
+.header__menu-item {
+  letter-spacing: 0;
+  transition: letter-spacing 0.35s ease, color var(--duration-short) ease;
+  position: relative;
+}
+
 .header__menu-item:hover {
   color: rgb(var(--color-foreground));
+  letter-spacing: 2px;
 }
 
 .header__menu-item span {
@@ -2815,8 +2822,37 @@ details[open] > .header__submenu {
 }
 
 .header__menu-item:hover span {
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
+  text-decoration: none;
+}
+
+/* Button 2 effect - expanding border lines */
+.header__menu-item:after,
+.header__menu-item:before {
+  backface-visibility: hidden;
+  border: 1px solid rgba(var(--color-foreground), 0);
+  bottom: 0px;
+  content: " ";
+  display: block;
+  margin: 0 auto;
+  position: absolute;
+  transition: all 280ms ease-in-out;
+  width: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.header__menu-item:hover:after,
+.header__menu-item:hover:before {
+  backface-visibility: hidden;
+  border-color: rgb(var(--color-foreground));
+  transition: width 350ms ease-in-out;
+  width: 70%;
+}
+
+.header__menu-item:hover:before {
+  bottom: auto;
+  top: 0;
+  width: 70%;
 }
 
 details[open] > .header__menu-item {
@@ -2839,7 +2875,7 @@ details[open] > .header__menu-item .icon-caret {
 }
 
 .header__menu-item:hover .header__active-menu-item {
-  text-decoration-thickness: 0.2rem;
+  text-decoration: none;
 }
 
 .header__submenu {
@@ -2877,7 +2913,7 @@ details[open] > .header__menu-item .icon-caret {
 }
 
 .header__submenu .header__menu-item:hover {
-  text-decoration-line: underline;
+  letter-spacing: 1px;
 }
 
 .header__menu-item .icon-caret {
@@ -3018,11 +3054,17 @@ details-disclosure > details {
 .header-wrapper .header__menu-item:hover {
   color: #000 !important;
   text-decoration: none !important;
-  opacity: 0.8;
+  opacity: 0.9;
+  letter-spacing: 2px;
 }
 
 .header-wrapper .header__menu-item:hover span {
   text-decoration: none !important;
+}
+
+.header-wrapper .header__menu-item:hover:after,
+.header-wrapper .header__menu-item:hover:before {
+  border-color: #000 !important;
 }
 
 .header-wrapper .header__active-menu-item {
@@ -3726,4 +3768,15 @@ details-disclosure > details {
   100% {
     transform: translateX(100%) scaleX(0);
   }
+}
+
+/* Navbar search overrides - ensure no conflicts with old modal styles */
+.navbar-search-wrapper * {
+  box-sizing: border-box;
+}
+
+/* Hide old search modal if it still exists */
+.header__search,
+.search-modal {
+  display: none !important;
 }

@@ -5,6 +5,7 @@
 
 {%- if settings.predictive_search_enabled -%}
   <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
+  <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
 {%- if section.settings.menu_type_desktop == 'mega' -%}
