@@ -8,6 +8,18 @@
   overflow: visible;
 }
 
+/* Loading state management */
+.navbar-search-wrapper[data-loading="true"] .navbar-search-input {
+  transition: none !important;
+  width: 0px !important;
+  opacity: 0 !important;
+}
+
+.navbar-search-wrapper[data-loading="true"] .navbar-search-toggle {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
 .navbar-search-container {
   position: relative;
   height: 44px;

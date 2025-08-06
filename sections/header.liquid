@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="all">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- comment -%} Cart notification styles removed - using sliding cart panel instead {%- endcomment -%}
 
@@ -13,6 +13,36 @@
 {%- endif -%}
 
 <style>
+  /* Critical search styles to prevent FOUC */
+  navbar-search:not(:defined) .navbar-search-input {
+    width: 0px !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    right: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    pointer-events: none !important;
+  }
+  
+  navbar-search:not(:defined) .navbar-search-toggle {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 44px !important;
+    height: 44px !important;
+    background: none !important;
+    border: none !important;
+    cursor: pointer !important;
+  }
+  
+  navbar-search:not(:defined) .navbar-search-submit {
+    display: none !important;
+  }
+  
+  navbar-search:not(:defined) .navbar-search-reset {
+    display: none !important;
+  }
+  
   header-drawer {
     justify-self: start;
     margin-left: -1.2rem;
