@@ -8,19 +8,17 @@ if (!customElements.get('product-form')) {
         this.form = this.querySelector('form');
         this.variantIdInput.disabled = false;
         this.form.addEventListener('submit', this.onSubmitHandler.bind(this));
-        this.cart = document.querySelector('sliding-cart-panel');
+        this.cart = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
         this.submitButton = this.querySelector('[type="submit"]');
         this.submitButtonText = this.submitButton.querySelector('span');
 
-        if (document.querySelector('sliding-cart-panel')) this.submitButton.setAttribute('aria-haspopup', 'dialog');
+        if (document.querySelector('cart-drawer')) this.submitButton.setAttribute('aria-haspopup', 'dialog');
 
         this.hideErrors = this.dataset.hideErrors === 'true';
       }
 
       onSubmitHandler(evt) {
-        console.log('Product form submit handler triggered');
         evt.preventDefault();
-        evt.stopImmediatePropagation(); // Prevent any other form submission handlers
         if (this.submitButton.getAttribute('aria-disabled') === 'true') return;
 
         this.handleErrorMessage();
@@ -63,16 +61,9 @@ if (!customElements.get('product-form')) {
               soldOutMessage.classList.remove('hidden');
               this.error = true;
               return;
-            }
-
-            // Always try to open the sliding cart after successful add to cart
-            console.log('Opening sliding cart panel after successful add to cart');
-            const slidingCartPanel = document.querySelector('sliding-cart-panel');
-            if (slidingCartPanel) {
-              console.log('Sliding cart panel found, opening...');
-              slidingCartPanel.open();
-            } else {
-              console.log('Sliding cart panel not found!');
+            } else if (!this.cart) {
+              window.location = window.routes.cart_url;
+              return;
             }
 
             const startMarker = CartPerformance.createStartingMarker('add:wait-for-subscribers');
@@ -92,24 +83,7 @@ if (!customElements.get('product-form')) {
                 () => {
                   setTimeout(() => {
                     CartPerformance.measure("add:paint-updated-sections", () => {
-                      // For sliding cart, refresh the panel and open it
-                      if (this.cart) {
-                        if (this.cart.refreshCartPanel) {
-                          this.cart.refreshCartPanel();
-                        }
-                        if (this.cart.open) {
-                          this.cart.open();
-                        }
-                      } else {
-                        // Fallback: find sliding cart panel and open it
-                        const slidingCartPanel = document.querySelector('sliding-cart-panel');
-                        if (slidingCartPanel) {
-                          if (slidingCartPanel.refreshCartPanel) {
-                            slidingCartPanel.refreshCartPanel();
-                          }
-                          slidingCartPanel.open();
-                        }
-                      }
+                      this.cart.renderContents(response);
                     });
                   });
                 },
@@ -118,34 +92,12 @@ if (!customElements.get('product-form')) {
               quickAddModal.hide(true);
             } else {
               CartPerformance.measure("add:paint-updated-sections", () => {
-                // For sliding cart, refresh the panel and open it
-                if (this.cart) {
-                  if (this.cart.refreshCartPanel) {
-                    this.cart.refreshCartPanel();
-                  }
-                  if (this.cart.open) {
-                    this.cart.open();
-                  }
-                } else {
-                  // Fallback: find sliding cart panel and open it
-                  const slidingCartPanel = document.querySelector('sliding-cart-panel');
-                  if (slidingCartPanel) {
-                    if (slidingCartPanel.refreshCartPanel) {
-                      slidingCartPanel.refreshCartPanel();
-                    }
-                    slidingCartPanel.open();
-                  }
-                }
+                this.cart.renderContents(response);
               });
             }
           })
           .catch((e) => {
             console.error(e);
-            // Even if there's an error, try to open the sliding cart
-            const slidingCartPanel = document.querySelector('sliding-cart-panel');
-            if (slidingCartPanel) {
-              slidingCartPanel.open();
-            }
           })
           .finally(() => {
             this.submitButton.classList.remove('loading');
