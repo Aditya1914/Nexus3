@@ -17,6 +17,17 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  cart-items .page-width {
+    padding-top: 3rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    cart-items .page-width {
+      padding-top: 7rem;
+    }
+  }
+
 {%- endstyle -%}
 
 {%- unless settings.cart_type == 'drawer' -%}

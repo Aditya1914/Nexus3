@@ -265,6 +265,10 @@
         {{ 'component-price.css' | asset_url | stylesheet_tag }}
         {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
       {%- endif -%}
+
+      {%- if settings.cart_type == 'notification' -%}
+        {{ 'component-cart-notification.css' | asset_url | stylesheet_tag }}
+      {%- endif -%}
   
       {%- unless settings.type_body_font.system? -%}
         {% comment %}theme-check-disable AssetPreload{% endcomment %}
@@ -305,6 +309,10 @@
   
       {%- if settings.cart_type == 'drawer' -%}
         {%- render 'cart-drawer' -%}
+      {%- endif -%}
+
+      {%- if settings.cart_type == 'notification' -%}
+        {%- render 'cart-notification', color_scheme: 'scheme-1' -%}
       {%- endif -%}
   
       {% sections 'header-group' %}
@@ -371,6 +379,10 @@
   
       {%- if settings.cart_type == 'drawer' -%}
         <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
+      {%- endif -%}
+
+      {%- if settings.cart_type == 'notification' -%}
+        <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
       {%- endif -%}
     </body>
   </html>
